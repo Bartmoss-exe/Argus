@@ -1,11 +1,51 @@
 import { useT } from '../i18n/LanguageContext'
-import { LANGS } from '../i18n/dict'
+import { LANGS, type Lang } from '../i18n/dict'
+
+/* Bandeiras em SVG inline — emoji de bandeira não renderiza no Windows */
+function Flag({ lang }: { lang: Lang }) {
+  const common = 'h-[11px] w-4 rounded-[2px] ring-1 ring-white/20'
+  switch (lang) {
+    case 'en':
+      return (
+        <svg viewBox="0 0 24 16" className={common} aria-label="English">
+          <rect width="24" height="16" fill="#012169" />
+          <path d="M0 0l24 16M24 0L0 16" stroke="#fff" strokeWidth="3.2" />
+          <path d="M0 0l24 16M24 0L0 16" stroke="#C8102E" strokeWidth="1.3" />
+          <path d="M12 0v16M0 8h24" stroke="#fff" strokeWidth="5.2" />
+          <path d="M12 0v16M0 8h24" stroke="#C8102E" strokeWidth="2.8" />
+        </svg>
+      )
+    case 'es':
+      return (
+        <svg viewBox="0 0 24 16" className={common} aria-label="Español">
+          <rect width="24" height="16" fill="#AA151B" />
+          <rect y="4" width="24" height="8" fill="#F1BF00" />
+        </svg>
+      )
+    case 'pt':
+      return (
+        <svg viewBox="0 0 24 16" className={common} aria-label="Português">
+          <rect width="24" height="16" fill="#E42518" />
+          <rect width="9.6" height="16" fill="#046A38" />
+          <circle cx="9.6" cy="8" r="3.1" fill="#FFE900" stroke="#E42518" strokeWidth="0.7" />
+        </svg>
+      )
+    case 'fr':
+      return (
+        <svg viewBox="0 0 24 16" className={common} aria-label="Français">
+          <rect width="8" height="16" fill="#0055A4" />
+          <rect x="8" width="8" height="16" fill="#fff" />
+          <rect x="16" width="8" height="16" fill="#EF4135" />
+        </svg>
+      )
+  }
+}
 
 export default function Navbar() {
   const { lang, setLang, t } = useT()
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 mix-blend-difference">
+    <header className="fixed inset-x-0 top-0 z-50 bg-gradient-to-b from-black/70 to-transparent">
       <nav className="flex items-center justify-between px-6 py-5 text-white md:px-10">
         <a href="#" className="flex items-baseline gap-2">
           <span className="text-lg font-bold tracking-tight">ARGUS</span>
@@ -19,17 +59,24 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-4 md:gap-6">
-          {/* language switcher */}
-          <div className="mono flex items-center gap-2.5 text-[10px] uppercase tracking-[0.2em]">
+          {/* language switcher com bandeiras */}
+          <div className="flex items-center gap-1 rounded-full border border-white/15 bg-black/50 px-2 py-1.5 backdrop-blur-sm">
             {LANGS.map((l) => (
               <button
                 key={l}
                 onClick={() => setLang(l)}
-                className={`transition-colors duration-300 ${
-                  lang === l ? 'text-white' : 'text-white/35 hover:text-white/75'
+                data-hover
+                title={l.toUpperCase()}
+                className={`flex items-center gap-1.5 rounded-full px-2 py-1 transition-all duration-300 ${
+                  lang === l
+                    ? 'bg-white/10 opacity-100 shadow-[inset_0_0_0_1px_rgba(255,46,46,0.6)]'
+                    : 'opacity-45 hover:opacity-90'
                 }`}
               >
-                {l}
+                <Flag lang={l} />
+                <span className="mono hidden text-[10px] uppercase tracking-[0.15em] text-white sm:inline">
+                  {l}
+                </span>
               </button>
             ))}
           </div>
