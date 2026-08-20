@@ -11,6 +11,7 @@ import Manifesto from '../sections/Manifesto'
 import Services from '../sections/Services'
 import Stats from '../sections/Stats'
 import Contact from '../sections/Contact'
+import { LanguageProvider } from '../i18n/LanguageContext'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -38,15 +39,17 @@ export default function Home() {
     <div className="grain relative bg-[#050505] text-[#f4f4f4]">
       <Cursor />
       {!loaded && <Loader onDone={handleDone} />}
-      <Navbar />
-      <main>
-        <Hero start={loaded} />
-        <Operation />
-        <Manifesto />
-        <Services />
-        <Stats />
-        <Contact />
-      </main>
+      <LanguageProvider>
+        <Navbar />
+        <main>
+          <Hero start={loaded} />
+          <Operation />
+          <Manifesto />
+          <Services />
+          <Stats />
+          <Contact />
+        </main>
+      </LanguageProvider>
     </div>
   )
 }

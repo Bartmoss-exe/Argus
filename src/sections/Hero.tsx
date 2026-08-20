@@ -1,11 +1,13 @@
 import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useT } from '../i18n/LanguageContext'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Hero({ start }: { start: boolean }) {
   const root = useRef<HTMLElement>(null)
+  const { t } = useT()
 
   useLayoutEffect(() => {
     if (!start) return
@@ -89,33 +91,35 @@ export default function Hero({ start }: { start: boolean }) {
       {/* title */}
       <div className="hero-title-wrap relative z-10 flex flex-1 flex-col justify-center px-6 md:px-10">
         <p className="hero-fade mono mb-6 translate-y-4 text-[11px] uppercase tracking-[0.35em] text-[#ff2e2e] opacity-0">
-          Argus Red Team // segurança ofensiva — est. 2016
+          {t.hero.badge}
         </p>
         <h1 className="text-[clamp(3.4rem,12.5vw,11.5rem)] font-bold leading-[0.92] tracking-[-0.03em]">
           <span className="hero-line block overflow-hidden">
-            <span className="block translate-y-full">ATACAMOS</span>
+            <span className="block translate-y-full">{t.hero.line1}</span>
           </span>
           <span className="hero-line block overflow-hidden">
-            <span className="text-stroke block translate-y-full">PRIMEIRO<span className="text-stroke-red">.</span></span>
+            <span className="text-stroke block translate-y-full">
+              {t.hero.line2.replace('.', '')}
+              <span className="text-stroke-red">.</span>
+            </span>
           </span>
         </h1>
         <p className="hero-fade mt-8 max-w-md translate-y-4 text-sm leading-relaxed text-[#8a8a8a] opacity-0 md:text-base">
-          Pentest, red team e emulação de adversário para empresas que não podem
-          falhar. Encontramos o caminho do atacante — antes do atacante.
+          {t.hero.sub}
         </p>
       </div>
 
       {/* bottom meta bar */}
       <div className="relative z-10 flex items-end justify-between px-6 pb-6 md:px-10">
         <div className="hero-fade mono translate-y-4 text-[10px] uppercase tracking-[0.3em] text-[#6f6f6f] opacity-0">
-          São Paulo — Global
+          {t.hero.location}
         </div>
         <div className="hero-fade mono flex translate-y-4 items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-[#6f6f6f] opacity-0">
           <span className="blink inline-block h-1.5 w-1.5 rounded-full bg-[#ff2e2e]" />
           REC 00:00:00
         </div>
         <div className="hero-fade mono translate-y-4 text-[10px] uppercase tracking-[0.3em] text-[#6f6f6f] opacity-0">
-          Scroll para infiltrar ↓
+          {t.hero.scroll}
         </div>
       </div>
     </section>

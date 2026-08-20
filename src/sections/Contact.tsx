@@ -1,11 +1,13 @@
 import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useT } from '../i18n/LanguageContext'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Contact() {
   const root = useRef<HTMLElement>(null)
+  const { t } = useT()
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -38,16 +40,18 @@ export default function Contact() {
       />
 
       <p className="cta-fade mono mb-8 text-[11px] uppercase tracking-[0.35em] text-[#6f6f6f]">
-        <span className="text-[#ff2e2e]">//</span> Canal seguro aberto
+        <span className="text-[#ff2e2e]">{t.contact.label.slice(0, 2)}</span>
+        {t.contact.label.slice(2)}
       </p>
 
       <h2 className="relative text-[clamp(3rem,10vw,9rem)] font-bold leading-[0.95] tracking-[-0.03em]">
         <span className="cta-line block overflow-hidden">
-          <span className="block">PRONTO PARA</span>
+          <span className="block">{t.contact.line1}</span>
         </span>
         <span className="cta-line block overflow-hidden">
           <span className="block">
-            SER <span className="text-stroke-red">TESTADO</span>?
+            {t.contact.line2a} <span className="text-stroke-red">{t.contact.line2hl}</span>
+            {t.contact.line2suffix}
           </span>
         </span>
       </h2>
@@ -57,18 +61,18 @@ export default function Contact() {
           href="mailto:ops@argusredteam.com"
           className="mono group inline-flex w-fit items-center gap-4 border border-white/25 px-8 py-5 text-sm uppercase tracking-[0.25em] transition-colors duration-300 hover:border-[#ff2e2e] hover:bg-[#ff2e2e] hover:text-black"
         >
-          Iniciar operação
+          {t.contact.cta}
           <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
         </a>
         <p className="mono text-[11px] uppercase tracking-[0.25em] text-[#6f6f6f]">
-          ops@argusredteam.com — PGP disponível · resposta em 24h
+          {t.contact.note}
         </p>
       </div>
 
       {/* footer */}
       <footer className="mt-32 flex flex-col gap-4 border-t border-[#1b1b1b] pt-6 md:flex-row md:items-center md:justify-between">
         <p className="mono text-[10px] uppercase tracking-[0.3em] text-[#6f6f6f]">
-          © 2026 ARGUS RED TEAM — argusredteam.vercel.app
+          {t.contact.footer}
         </p>
         <div className="mono flex gap-6 text-[10px] uppercase tracking-[0.3em] text-[#6f6f6f]">
           <a href="#" className="transition-colors hover:text-white">LinkedIn</a>
@@ -76,7 +80,7 @@ export default function Contact() {
           <a href="#" className="transition-colors hover:text-white">X</a>
         </div>
         <p className="mono text-[10px] uppercase tracking-[0.3em] text-[#6f6f6f]">
-          Atacamos primeiro<span className="text-[#ff2e2e]">.</span>
+          {t.contact.tagline.replace('.', '')}<span className="text-[#ff2e2e]">.</span>
         </p>
       </footer>
     </section>

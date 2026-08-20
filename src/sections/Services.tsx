@@ -1,19 +1,13 @@
 import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useT } from '../i18n/LanguageContext'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const SERVICES = [
-  { n: '01', name: 'Web & API Pentest', tags: 'OWASP · API · Business Logic', desc: 'Teste manual profundo em aplicações web e APIs.' },
-  { n: '02', name: 'Red Team Operations', tags: 'Adversary Emulation · C2 · EDR Bypass', desc: 'Operações encobertas de objetivo único: provar impacto real.' },
-  { n: '03', name: 'Cloud & Active Directory', tags: 'AWS · Azure · AD · Kubernetes', desc: 'Caminhos de escalação em nuvem e diretório corporativo.' },
-  { n: '04', name: 'Engenharia Social', tags: 'Phishing · Vishing · Físico', desc: 'O elo humano testado com campanhas realistas e éticas.' },
-  { n: '05', name: 'Purple Team', tags: 'Detecção · MITRE ATT&CK · SOC', desc: 'Transformamos cada ataque em telemetria e detecção.' },
-]
-
 export default function Services() {
   const root = useRef<HTMLElement>(null)
+  const { t } = useT()
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -33,22 +27,22 @@ export default function Services() {
     <section ref={root} id="capacidades" className="relative py-24 md:py-36">
       <div className="mb-14 flex items-end justify-between px-6 md:px-10">
         <h2 className="text-[clamp(2.5rem,6vw,5.5rem)] font-bold leading-none tracking-[-0.03em]">
-          CAPACIDADES
+          {t.services.title}
         </h2>
         <p className="mono hidden text-[11px] uppercase tracking-[0.3em] text-[#6f6f6f] md:block">
-          [ 05 vetores de ataque ]
+          {t.services.meta}
         </p>
       </div>
 
       <div className="border-b border-[#1b1b1b]">
-        {SERVICES.map((s) => (
+        {t.services.items.map((s) => (
           <a
             key={s.n}
             href="#contato"
             className="svc-row group relative block overflow-hidden border-t border-[#1b1b1b]"
           >
             {/* red fill sweep */}
-            <div className="absolute inset-0 origin-bottom scale-y-0 bg-[#ff2e2e] transition-transform duration-500 ease-expo group-hover:scale-y-100" />
+            <div className="ease-expo absolute inset-0 origin-bottom scale-y-0 bg-[#ff2e2e] transition-transform duration-500 group-hover:scale-y-100" />
             <div className="relative z-10 grid grid-cols-[auto_1fr_auto] items-center gap-6 px-6 py-7 transition-colors duration-500 group-hover:text-black md:grid-cols-[6rem_1fr_1fr_auto] md:px-10 md:py-9">
               <span className="mono text-xs text-[#6f6f6f] transition-colors duration-500 group-hover:text-black/70">
                 /{s.n}

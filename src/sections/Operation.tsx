@@ -1,42 +1,21 @@
 import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useT } from '../i18n/LanguageContext'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const PHASES = [
-  {
-    img: '/img/seq-recon.png',
-    index: '01',
-    title: 'RECON',
-    desc: 'Mapeamos a sua superfície de ataque como um adversário real: OSINT, enumeração de infraestrutura, footprint completo — antes que alguém faça isso por você.',
-    log: '> nmap -sS --top-ports 1000 alvo.corp … 14 portas abertas',
-  },
-  {
-    img: '/img/seq-exploit.png',
-    index: '02',
-    title: 'EXPLORAÇÃO',
-    desc: 'Nada de scanners de prateleira. Engenharia de exploit sob medida, cadeias de ataque manuais e bypass de defesas modernas — EDR, WAF, MFA.',
-    log: '> exploit/multi/handler → sessão aberta em 10.0.4.17',
-  },
-  {
-    img: '/img/seq-escalate.png',
-    index: '03',
-    title: 'ESCALAÇÃO',
-    desc: 'De um único foothold ao domínio total: movimento lateral, escalada de privilégio e persistência — documentando cada salto da cadeia.',
-    log: '> getsystem … NT AUTHORITY\\SYSTEM — domínio comprometido',
-  },
-  {
-    img: '/img/seq-report.png',
-    index: '04',
-    title: 'RELATÓRIO',
-    desc: 'Cada achado com evidência reproduzível, impacto de negócio e plano de remediação acionável. Depois, retestamos de graça até fechar.',
-    log: '> report.pdf — 47 achados, 12 críticos, 0 falsos positivos',
-  },
+const IMGS = [
+  '/img/seq-recon.png',
+  '/img/seq-exploit.png',
+  '/img/seq-escalate.png',
+  '/img/seq-report.png',
 ]
 
 export default function Operation() {
   const root = useRef<HTMLElement>(null)
+  const { t, lang } = useT()
+  const phases = t.operation.phases
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -58,7 +37,7 @@ export default function Operation() {
       // Vertical progress fill
       tl.fromTo('.op-progress-fill', { scaleY: 0 }, { scaleY: 1, duration: 4 }, 0)
 
-      PHASES.forEach((_, i) => {
+      phases.forEach((_, i) => {
         // Camera push on each image during its segment
         tl.fromTo(`.op-img-${i}`, { scale: 1.02 }, { scale: 1.14, duration: 1 }, i)
 
@@ -87,7 +66,7 @@ export default function Operation() {
           { autoAlpha: 1, y: 0, duration: 0.28, ease: 'power2.out' },
           i + 0.08,
         )
-        if (i < PHASES.length - 1) {
+        if (i < phases.length - 1) {
           tl.to(`.op-text-${i}`, { autoAlpha: 0, y: -48, duration: 0.28, ease: 'power2.in' }, i + 0.72)
         }
       })
@@ -102,28 +81,29 @@ export default function Operation() {
       })
     }, root)
     return () => ctx.revert()
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lang])
 
   return (
     <section ref={root} id="operacao" className="relative h-[100svh] overflow-hidden bg-[#050505]">
       {/* header */}
       <div className="op-head absolute inset-x-0 top-0 z-20 flex items-center justify-between px-6 pt-20 md:px-10">
         <p className="mono text-[11px] uppercase tracking-[0.35em] text-white">
-          A operação <span className="text-[#ff2e2e]">— 04 fases</span>
+          {t.operation.heading} <span className="text-[#ff2e2e]">— 04</span>
         </p>
         <p className="mono flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-[#6f6f6f]">
           <span className="blink inline-block h-1.5 w-1.5 rounded-full bg-[#ff2e2e]" />
-          feed ao vivo
+          {t.operation.live}
         </p>
       </div>
 
       <div className="grid h-full grid-cols-1 items-center gap-6 px-6 pt-24 pb-10 md:grid-cols-[1.15fr_auto_1fr] md:gap-12 md:px-10">
         {/* frame */}
         <div className="scanlines relative aspect-[16/10] w-full overflow-hidden border border-[#1b1b1b] bg-black md:aspect-auto md:h-[62vh]">
-          {PHASES.map((p, i) => (
+          {phases.map((p, i) => (
             <img
               key={p.index}
-              src={p.img}
+              src={IMGS[i]}
               alt={p.title}
               className={`op-img-${i} absolute inset-0 h-full w-full object-cover will-change-transform`}
               style={i > 0 ? { clipPath: 'inset(100% 0 0 0)' } : undefined}
@@ -145,7 +125,7 @@ export default function Operation() {
           <div className="op-progress-fill absolute inset-0 origin-top bg-[#ff2e2e]" />
           <div className="absolute -left-[1.35rem] top-0 h-10 overflow-hidden">
             <div className="op-counter-col flex h-[10rem] flex-col will-change-transform">
-              {PHASES.map((p) => (
+              {phases.map((p) => (
                 <span key={p.index} className="mono flex h-10 items-center text-sm tabular-nums text-white">
                   {p.index}
                 </span>
@@ -156,7 +136,7 @@ export default function Operation() {
 
         {/* text stack */}
         <div className="relative h-[38vh] md:h-[62vh]">
-          {PHASES.map((p, i) => (
+          {phases.map((p, i) => (
             <div key={p.index} className={`op-text-${i} absolute inset-0 flex flex-col justify-center opacity-0`}>
               <span className="text-stroke-faint text-[clamp(4rem,8vw,7.5rem)] font-bold leading-none">
                 {p.index}

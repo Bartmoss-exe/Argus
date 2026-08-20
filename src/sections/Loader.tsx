@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 
 const BOOT_LINES = [
-  '> argus.core — inicializando módulos ofensivos',
-  '> carregando cadeias de exploit .......... OK',
-  '> resolvendo alvos ...................... OK',
-  '> autorização de engajamento ............ CONFIRMADA',
-  '> acesso concedido_',
+  '> argus.core — initializing offensive modules',
+  '> loading exploit chains ................ OK',
+  '> resolving targets .................... OK',
+  '> engagement authorization ............. CONFIRMED',
+  '> access granted_',
 ]
 
 export default function Loader({ onDone }: { onDone: () => void }) {
