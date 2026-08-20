@@ -89,7 +89,7 @@ export default function Hero({ start }: { start: boolean }) {
       {/* title */}
       <div className="hero-title-wrap relative z-10 flex flex-1 flex-col justify-center px-6 md:px-10">
         <p className="hero-fade mono mb-6 translate-y-4 text-[11px] uppercase tracking-[0.35em] text-[#ff2e2e] opacity-0">
-          Segurança ofensiva // est. 2016
+          Argus Red Team // segurança ofensiva — est. 2016
         </p>
         <h1 className="text-[clamp(3.4rem,12.5vw,11.5rem)] font-bold leading-[0.92] tracking-[-0.03em]">
           <span className="hero-line block overflow-hidden">

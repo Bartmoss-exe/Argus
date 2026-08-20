@@ -54,21 +54,21 @@ export default function Contact() {
 
       <div className="cta-fade mt-12 flex flex-col gap-6 md:flex-row md:items-center">
         <a
-          href="mailto:ops@argussec.io"
+          href="mailto:ops@argusredteam.com"
           className="mono group inline-flex w-fit items-center gap-4 border border-white/25 px-8 py-5 text-sm uppercase tracking-[0.25em] transition-colors duration-300 hover:border-[#ff2e2e] hover:bg-[#ff2e2e] hover:text-black"
         >
           Iniciar operação
           <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
         </a>
         <p className="mono text-[11px] uppercase tracking-[0.25em] text-[#6f6f6f]">
-          ops@argussec.io — PGP disponível · resposta em 24h
+          ops@argusredteam.com — PGP disponível · resposta em 24h
         </p>
       </div>
 
       {/* footer */}
       <footer className="mt-32 flex flex-col gap-4 border-t border-[#1b1b1b] pt-6 md:flex-row md:items-center md:justify-between">
         <p className="mono text-[10px] uppercase tracking-[0.3em] text-[#6f6f6f]">
-          © 2026 ARGUS — Segurança Ofensiva
+          © 2026 ARGUS RED TEAM — argusredteam.vercel.app
         </p>
         <div className="mono flex gap-6 text-[10px] uppercase tracking-[0.3em] text-[#6f6f6f]">
           <a href="#" className="transition-colors hover:text-white">LinkedIn</a>
