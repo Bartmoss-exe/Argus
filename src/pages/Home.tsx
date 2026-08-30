@@ -12,6 +12,7 @@ import Services from '../sections/Services'
 import Stats from '../sections/Stats'
 import Contact from '../sections/Contact'
 import SectionDivider from '../components/SectionDivider'
+import BackToTop from '../components/BackToTop'
 import { LanguageProvider } from '../i18n/LanguageContext'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -58,6 +59,7 @@ export default function Home() {
           <SectionDivider direction="right" />
           <Contact />
         </main>
+        <BackToTop lenis={lenis} />
       </LanguageProvider>
     </div>
   )
