@@ -18,26 +18,62 @@ export default function Stats() {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      // Counter animation with scrub for bidirectional counting
       gsap.utils.toArray<HTMLElement>('.stat-value').forEach((el) => {
         const target = Number(el.dataset.value || 0)
         const obj = { v: 0 }
         gsap.to(obj, {
           v: target,
-          duration: 1.8,
-          ease: 'power2.out',
-          scrollTrigger: { trigger: el, start: 'top 85%', once: true },
+          ease: 'none',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            end: 'top 55%',
+            scrub: 1,
+          },
           onUpdate: () => {
-            el.textContent = String(Math.round(obj.v))
+            if (el) el.textContent = String(Math.round(obj.v))
           },
         })
       })
-      gsap.from('.stat-cell', {
-        autoAlpha: 0,
-        y: 40,
-        duration: 0.8,
-        ease: 'power3.out',
-        stagger: 0.1,
-        scrollTrigger: { trigger: root.current, start: 'top 75%' },
+
+      // Bidirectional reveal for stat cells
+      gsap.utils.toArray<HTMLElement>('.stat-cell').forEach((el, i) => {
+        gsap.fromTo(
+          el,
+          { autoAlpha: 0, y: 50 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            delay: i * 0.1,
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 85%',
+              end: 'top 60%',
+              toggleActions: 'play reverse play reverse',
+            },
+          }
+        )
+      })
+
+      // Parallax on the numbers for scroll depth
+      gsap.utils.toArray<HTMLElement>('.stat-number-wrap').forEach((el) => {
+        gsap.fromTo(
+          el,
+          { yPercent: 15 },
+          {
+            yPercent: -15,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 1,
+            },
+          }
+        )
       })
     }, root)
     return () => ctx.revert()
@@ -51,10 +87,12 @@ export default function Stats() {
             key={i}
             className={`stat-cell px-6 py-12 md:px-10 md:py-16 ${i > 0 ? 'border-l border-[#1b1b1b]' : ''} ${i >= 2 ? 'border-t border-[#1b1b1b] md:border-t-0' : ''}`}
           >
-            <p className="text-5xl font-bold tabular-nums tracking-tight text-white md:text-7xl">
-              <span className="stat-value" data-value={s.value}>0</span>
-              <span className="text-[#ff2e2e]">{s.suffix}</span>
-            </p>
+            <div className="stat-number-wrap">
+              <p className="text-5xl font-bold tabular-nums tracking-tight text-white md:text-7xl">
+                <span className="stat-value" data-value={s.value}>0</span>
+                <span className="text-[#ff2e2e]">{s.suffix}</span>
+              </p>
+            </div>
             <p className="mono mt-4 text-[10px] uppercase leading-relaxed tracking-[0.2em] text-[#6f6f6f] md:text-[11px]">
               {t.stats.labels[i]}
             </p>

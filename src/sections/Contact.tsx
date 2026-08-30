@@ -11,20 +11,63 @@ export default function Contact() {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from('.cta-line span', {
-        yPercent: 110,
-        duration: 1.1,
-        ease: 'power4.out',
-        stagger: 0.12,
-        scrollTrigger: { trigger: root.current, start: 'top 65%' },
+      // Kinetic title with bidirectional scrub
+      gsap.fromTo(
+        '.cta-line span',
+        { yPercent: 110 },
+        {
+          yPercent: 0,
+          duration: 1.1,
+          ease: 'power4.out',
+          stagger: 0.12,
+          scrollTrigger: {
+            trigger: root.current,
+            start: 'top 65%',
+            end: 'top 40%',
+            scrub: 1,
+          },
+        }
+      )
+
+      // Fade elements with toggleActions for bidirectional
+      gsap.utils.toArray<HTMLElement>('.cta-fade').forEach((el, i) => {
+        gsap.fromTo(
+          el,
+          { autoAlpha: 0, y: 30 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.9,
+            ease: 'power3.out',
+            delay: i * 0.1,
+            scrollTrigger: {
+              trigger: root.current,
+              start: 'top 55%',
+              end: 'top 35%',
+              toggleActions: 'play reverse play reverse',
+            },
+          }
+        )
       })
-      gsap.from('.cta-fade', {
-        autoAlpha: 0,
-        y: 30,
-        duration: 0.9,
-        ease: 'power3.out',
-        stagger: 0.1,
-        scrollTrigger: { trigger: root.current, start: 'top 55%' },
+
+      // Footer links stagger reveal
+      gsap.utils.toArray<HTMLElement>('.footer-link').forEach((el, i) => {
+        gsap.fromTo(
+          el,
+          { autoAlpha: 0, y: 15 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power3.out',
+            delay: i * 0.08,
+            scrollTrigger: {
+              trigger: '.footer-links',
+              start: 'top 90%',
+              toggleActions: 'play reverse play reverse',
+            },
+          }
+        )
       })
     }, root)
     return () => ctx.revert()
@@ -71,15 +114,22 @@ export default function Contact() {
 
       {/* footer */}
       <footer className="mt-32 flex flex-col gap-4 border-t border-[#1b1b1b] pt-6 md:flex-row md:items-center md:justify-between">
-        <p className="mono text-[10px] uppercase tracking-[0.3em] text-[#6f6f6f]">
+        <p className="footer-link mono text-[10px] uppercase tracking-[0.3em] text-[#6f6f6f]">
           {t.contact.footer}
         </p>
-        <div className="mono flex gap-6 text-[10px] uppercase tracking-[0.3em] text-[#6f6f6f]">
-          <a href="#" className="transition-colors hover:text-white">LinkedIn</a>
-          <a href="#" className="transition-colors hover:text-white">GitHub</a>
-          <a href="#" className="transition-colors hover:text-white">X</a>
+        <div className="footer-links mono flex gap-6 text-[10px] uppercase tracking-[0.3em] text-[#6f6f6f]">
+          {['LinkedIn', 'GitHub', 'X'].map((name) => (
+            <a
+              key={name}
+              href="#"
+              className="footer-link group relative transition-colors hover:text-white"
+            >
+              {name}
+              <span className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-white transition-transform duration-300 group-hover:scale-x-100" />
+            </a>
+          ))}
         </div>
-        <p className="mono text-[10px] uppercase tracking-[0.3em] text-[#6f6f6f]">
+        <p className="footer-link mono text-[10px] uppercase tracking-[0.3em] text-[#6f6f6f]">
           {t.contact.tagline.replace('.', '')}<span className="text-[#ff2e2e]">.</span>
         </p>
       </footer>

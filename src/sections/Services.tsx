@@ -11,14 +11,45 @@ export default function Services() {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from('.svc-row', {
-        autoAlpha: 0,
-        y: 60,
-        duration: 0.9,
-        ease: 'power3.out',
-        stagger: 0.08,
-        scrollTrigger: { trigger: root.current, start: 'top 70%' },
+      // Bidirectional reveal: elements animate in on scroll down, out on scroll up
+      ScrollTrigger.batch('.svc-row', {
+        onEnter: (elements) => {
+          gsap.fromTo(
+            elements,
+            { autoAlpha: 0, y: 60 },
+            { autoAlpha: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08 }
+          )
+        },
+        onLeave: (elements) => {
+          gsap.to(elements, { autoAlpha: 0.3, y: -20, duration: 0.6, ease: 'power2.in', stagger: 0.05 })
+        },
+        onEnterBack: (elements) => {
+          gsap.to(elements, { autoAlpha: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08 })
+        },
+        onLeaveBack: (elements) => {
+          gsap.to(elements, { autoAlpha: 0.3, y: 20, duration: 0.6, ease: 'power2.in', stagger: 0.05 })
+        },
+        start: 'top 75%',
+        end: 'bottom 25%',
       })
+
+      // Title reveal with scrub for bidirectional feel
+      gsap.fromTo(
+        '.svc-title',
+        { autoAlpha: 0, y: 40 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.svc-title',
+            start: 'top 80%',
+            end: 'top 50%',
+            scrub: 1,
+          },
+        }
+      )
     }, root)
     return () => ctx.revert()
   }, [])
@@ -26,7 +57,7 @@ export default function Services() {
   return (
     <section ref={root} id="capacidades" className="relative py-24 md:py-36">
       <div className="mb-14 flex items-end justify-between px-6 md:px-10">
-        <h2 className="text-[clamp(2.5rem,6vw,5.5rem)] font-bold leading-none tracking-[-0.03em]">
+        <h2 className="svc-title text-[clamp(2.5rem,6vw,5.5rem)] font-bold leading-none tracking-[-0.03em]">
           {t.services.title}
         </h2>
         <p className="mono hidden text-[11px] uppercase tracking-[0.3em] text-[#6f6f6f] md:block">
