@@ -21,7 +21,7 @@ export default function Manifesto() {
           scrollTrigger: {
             trigger: root.current,
             start: 'top 75%',
-            end: 'bottom 55%',
+            end: 'bottom 80%',
             scrub: true,
           },
         },

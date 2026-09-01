@@ -99,7 +99,7 @@ export default function Navbar({ lenis }: NavbarProps) {
         <nav className="flex items-center justify-between px-6 py-5 text-white md:px-10">
           <a href="#" className="flex items-baseline gap-2">
             <span className="text-lg font-bold tracking-tight">ARGUS</span>
-            <span className="mono text-[10px] uppercase tracking-[0.3em] text-[#ff2e2e]">Red Team</span>
+            <span className="mono text-[10px] uppercase tracking-[0.3em] text-[#ff2e2e]">Pentest</span>
           </a>
 
           <div className="mono hidden items-center gap-8 text-[11px] uppercase tracking-[0.25em] md:flex">

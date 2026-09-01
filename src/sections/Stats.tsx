@@ -27,8 +27,8 @@ export default function Stats() {
           ease: 'none',
           scrollTrigger: {
             trigger: el,
-            start: 'top 85%',
-            end: 'top 55%',
+            start: 'top 90%',
+            end: 'top 70%',
             scrub: 1,
           },
           onUpdate: () => {
@@ -37,7 +37,7 @@ export default function Stats() {
         })
       })
 
-      // Bidirectional reveal for stat cells
+      // Reveal stat cells; reverse only when scrolling back above the start
       gsap.utils.toArray<HTMLElement>('.stat-cell').forEach((el, i) => {
         gsap.fromTo(
           el,
@@ -51,8 +51,7 @@ export default function Stats() {
             scrollTrigger: {
               trigger: el,
               start: 'top 85%',
-              end: 'top 60%',
-              toggleActions: 'play reverse play reverse',
+              toggleActions: 'play none none reverse',
             },
           }
         )

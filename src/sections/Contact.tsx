@@ -29,7 +29,7 @@ export default function Contact() {
         }
       )
 
-      // Fade elements with toggleActions for bidirectional
+      // Fade elements; reverse only when scrolling back above the start
       gsap.utils.toArray<HTMLElement>('.cta-fade').forEach((el, i) => {
         gsap.fromTo(
           el,
@@ -43,8 +43,7 @@ export default function Contact() {
             scrollTrigger: {
               trigger: root.current,
               start: 'top 55%',
-              end: 'top 35%',
-              toggleActions: 'play reverse play reverse',
+              toggleActions: 'play none none reverse',
             },
           }
         )
@@ -64,7 +63,7 @@ export default function Contact() {
             scrollTrigger: {
               trigger: '.footer-links',
               start: 'top 90%',
-              toggleActions: 'play reverse play reverse',
+              toggleActions: 'play none none reverse',
             },
           }
         )
@@ -101,7 +100,7 @@ export default function Contact() {
 
       <div className="cta-fade mt-12 flex flex-col gap-6 md:flex-row md:items-center">
         <a
-          href="mailto:ops@argusredteam.com"
+          href="mailto:contato@arguspentest.com"
           className="mono group inline-flex w-fit items-center gap-4 border border-white/25 px-8 py-5 text-sm uppercase tracking-[0.25em] transition-colors duration-300 hover:border-[#ff2e2e] hover:bg-[#ff2e2e] hover:text-black"
         >
           {t.contact.cta}

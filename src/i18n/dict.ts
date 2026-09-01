@@ -46,7 +46,7 @@ export const dict: Record<Lang, Translation> = {
   en: {
     nav: { operation: 'Operation', capabilities: 'Capabilities', contact: 'Contact', cta: 'Start operation' },
     hero: {
-      badge: 'Argus Red Team // offensive security — est. 2016',
+      badge: 'Argus Pentest // offensive security — est. 2016',
       line1: 'WE STRIKE',
       line2: 'FIRST.',
       sub: 'Pentest, red team and adversary emulation for companies that cannot afford to fail. We find the attacker\u2019s path — before the attacker.',
@@ -113,8 +113,8 @@ export const dict: Record<Lang, Translation> = {
       line2hl: 'TESTED',
       line2suffix: '?',
       cta: 'Start operation',
-      note: 'ops@argusredteam.com — PGP available · reply within 24h',
-      footer: '© 2026 ARGUS RED TEAM — argusredteam.vercel.app',
+      note: 'contato@arguspentest.com — PGP available · reply within 24h',
+      footer: '© 2026 ARGUS PENTEST — argusredteam.vercel.app',
       tagline: 'We strike first.',
     },
   },
@@ -122,7 +122,7 @@ export const dict: Record<Lang, Translation> = {
   es: {
     nav: { operation: 'Operación', capabilities: 'Capacidades', contact: 'Contacto', cta: 'Iniciar operación' },
     hero: {
-      badge: 'Argus Red Team // seguridad ofensiva — est. 2016',
+      badge: 'Argus Pentest // seguridad ofensiva — est. 2016',
       line1: 'ATACAMOS',
       line2: 'PRIMERO.',
       sub: 'Pentest, red team y emulación de adversario para empresas que no pueden fallar. Encontramos el camino del atacante — antes que el atacante.',
@@ -189,8 +189,8 @@ export const dict: Record<Lang, Translation> = {
       line2hl: 'PROBADO',
       line2suffix: '?',
       cta: 'Iniciar operación',
-      note: 'ops@argusredteam.com — PGP disponible · respuesta en 24h',
-      footer: '© 2026 ARGUS RED TEAM — argusredteam.vercel.app',
+      note: 'contato@arguspentest.com — PGP disponible · respuesta en 24h',
+      footer: '© 2026 ARGUS PENTEST — argusredteam.vercel.app',
       tagline: 'Atacamos primero.',
     },
   },
@@ -198,7 +198,7 @@ export const dict: Record<Lang, Translation> = {
   pt: {
     nav: { operation: 'Operação', capabilities: 'Capacidades', contact: 'Contato', cta: 'Iniciar operação' },
     hero: {
-      badge: 'Argus Red Team // segurança ofensiva — est. 2016',
+      badge: 'Argus Pentest // segurança ofensiva — est. 2016',
       line1: 'ATACAMOS',
       line2: 'PRIMEIRO.',
       sub: 'Pentest, red team e emulação de adversário para empresas que não podem falhar. Encontramos o caminho do atacante — antes do atacante.',
@@ -265,8 +265,8 @@ export const dict: Record<Lang, Translation> = {
       line2hl: 'TESTADO',
       line2suffix: '?',
       cta: 'Iniciar operação',
-      note: 'ops@argusredteam.com — PGP disponível · resposta em 24h',
-      footer: '© 2026 ARGUS RED TEAM — argusredteam.vercel.app',
+      note: 'contato@arguspentest.com — PGP disponível · resposta em 24h',
+      footer: '© 2026 ARGUS PENTEST — argusredteam.vercel.app',
       tagline: 'Atacamos primeiro.',
     },
   },
@@ -274,7 +274,7 @@ export const dict: Record<Lang, Translation> = {
   fr: {
     nav: { operation: 'Opération', capabilities: 'Capacités', contact: 'Contact', cta: "Lancer l'opération" },
     hero: {
-      badge: 'Argus Red Team // sécurité offensive — est. 2016',
+      badge: 'Argus Pentest // sécurité offensive — est. 2016',
       line1: 'NOUS FRAPPONS',
       line2: "D'ABORD.",
       sub: "Pentest, red team et émulation d'adversaire pour les entreprises qui ne peuvent pas se permettre d'échouer. Nous trouvons le chemin de l'attaquant — avant l'attaquant.",
@@ -341,8 +341,8 @@ export const dict: Record<Lang, Translation> = {
       line2hl: 'TESTÉ',
       line2suffix: ' ?',
       cta: "Lancer l'opération",
-      note: 'ops@argusredteam.com — PGP disponible · réponse sous 24h',
-      footer: '© 2026 ARGUS RED TEAM — argusredteam.vercel.app',
+      note: 'contato@arguspentest.com — PGP disponible · réponse sous 24h',
+      footer: '© 2026 ARGUS PENTEST — argusredteam.vercel.app',
       tagline: "Nous frappons d'abord.",
     },
   },
