@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useT } from '../i18n/LanguageContext'
 import { LANGS, type Lang } from '../i18n/dict'
 import { useScrollDirection } from '../hooks/useScrollDirection'
+import { useScramble } from '../components/Scramble'
 import type Lenis from 'lenis'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -59,6 +60,11 @@ export default function Navbar({ lenis }: NavbarProps) {
   const progressRef = useRef<HTMLDivElement>(null)
   const [hidden, setHidden] = useState(false)
 
+  const navOperation = useScramble(t.nav.operation)
+  const navCapabilities = useScramble(t.nav.capabilities)
+  const navContact = useScramble(t.nav.contact)
+  const navCta = useScramble(t.nav.cta)
+
   // Hide/show based on scroll direction
   useEffect(() => {
     if (!navRef.current) return
@@ -104,9 +110,9 @@ export default function Navbar({ lenis }: NavbarProps) {
 
           <div className="mono hidden items-center gap-8 text-[11px] uppercase tracking-[0.25em] md:flex">
             {[
-              { href: '#operacao', label: t.nav.operation },
-              { href: '#capacidades', label: t.nav.capabilities },
-              { href: '#contato', label: t.nav.contact },
+              { href: '#operacao', label: navOperation },
+              { href: '#capacidades', label: navCapabilities },
+              { href: '#contato', label: navContact },
             ].map((item) => (
               <a
                 key={item.href}
@@ -146,7 +152,7 @@ export default function Navbar({ lenis }: NavbarProps) {
               href="#contato"
               className="mono hidden border border-white/40 px-4 py-2 text-[11px] uppercase tracking-[0.25em] transition-colors duration-300 hover:bg-white hover:text-black md:block"
             >
-              {t.nav.cta}
+              {navCta}
             </a>
           </div>
         </nav>

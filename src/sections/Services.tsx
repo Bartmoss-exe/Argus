@@ -2,12 +2,17 @@ import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useT } from '../i18n/LanguageContext'
+import { useScramble } from '../components/Scramble'
+import { ScrambleText } from '../components/ScrambleText'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Services() {
   const root = useRef<HTMLElement>(null)
   const { t } = useT()
+
+  const svcTitle = useScramble(t.services.title)
+  const svcMeta = useScramble(t.services.meta)
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -58,10 +63,10 @@ export default function Services() {
     <section ref={root} id="capacidades" className="relative py-24 md:py-36">
       <div className="mb-14 flex items-end justify-between px-6 md:px-10">
         <h2 className="svc-title text-[clamp(2.5rem,6vw,5.5rem)] font-bold leading-none tracking-[-0.03em]">
-          {t.services.title}
+          {svcTitle}
         </h2>
         <p className="mono hidden text-[11px] uppercase tracking-[0.3em] text-[#6f6f6f] md:block">
-          {t.services.meta}
+          {svcMeta}
         </p>
       </div>
 
@@ -78,7 +83,9 @@ export default function Services() {
               <span className="mono text-xs text-[#6f6f6f] transition-colors duration-500 group-hover:text-black/70">
                 /{s.n}
               </span>
-              <h3 className="text-2xl font-bold tracking-tight md:text-4xl">{s.name}</h3>
+              <h3 className="text-2xl font-bold tracking-tight md:text-4xl">
+                <ScrambleText text={s.name} />
+              </h3>
               <p className="mono hidden text-[11px] uppercase tracking-[0.2em] text-[#6f6f6f] transition-colors duration-500 group-hover:text-black/70 md:block">
                 {s.tags}
               </p>

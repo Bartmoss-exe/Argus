@@ -60,33 +60,35 @@ export default function BackToTop({ lenis }: BackToTopProps) {
       ref={btnRef}
       onClick={handleClick}
       data-hover
-      className="group fixed bottom-8 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-[#050505]/80 text-white opacity-0 backdrop-blur-sm transition-colors duration-300 hover:border-[#ff2e2e] md:right-10"
+      className="group fixed bottom-4 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-[#050505]/15 text-white opacity-0 transition-colors duration-300 hover:border-[#ff2e2e] hover:bg-[#050505]/80 md:right-10"
       aria-label="Voltar ao topo"
     >
-      {/* scroll progress ring */}
-      <svg className="absolute inset-0 h-full w-full -rotate-90" viewBox="0 0 48 48" aria-hidden>
-        <circle
-          cx="24"
-          cy="24"
-          r={RADIUS}
-          fill="none"
-          stroke="rgba(255,255,255,0.08)"
-          strokeWidth="2"
-        />
-        <circle
-          ref={ringRef}
-          cx="24"
-          cy="24"
-          r={RADIUS}
-          fill="none"
-          stroke="#ff2e2e"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeDasharray={CIRCUMFERENCE}
-          strokeDashoffset={CIRCUMFERENCE}
-        />
-      </svg>
-      <ArrowUp className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:text-[#ff2e2e]" />
+      <span className="relative h-full w-full opacity-30 transition-opacity duration-300 group-hover:opacity-100">
+        {/* scroll progress ring */}
+        <svg className="absolute inset-0 h-full w-full -rotate-90" viewBox="0 0 48 48" aria-hidden>
+          <circle
+            cx="24"
+            cy="24"
+            r={RADIUS}
+            fill="none"
+            stroke="rgba(255,255,255,0.08)"
+            strokeWidth="2"
+          />
+          <circle
+            ref={ringRef}
+            cx="24"
+            cy="24"
+            r={RADIUS}
+            fill="none"
+            stroke="#ff2e2e"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeDasharray={CIRCUMFERENCE}
+            strokeDashoffset={CIRCUMFERENCE}
+          />
+        </svg>
+        <ArrowUp className="absolute left-1/2 top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 transition-transform duration-300 group-hover:-translate-y-[55%] group-hover:text-[#ff2e2e]" />
+      </span>
     </button>
   )
 }

@@ -2,6 +2,8 @@ import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useT } from '../i18n/LanguageContext'
+import { useScramble } from '../components/Scramble'
+import { ScrambleText } from '../components/ScrambleText'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -14,8 +16,11 @@ const IMGS = [
 
 export default function Operation() {
   const root = useRef<HTMLElement>(null)
-  const { t, lang } = useT()
+  const { t } = useT()
   const phases = t.operation.phases
+
+  const opHeading = useScramble(t.operation.heading)
+  const opLive = useScramble(t.operation.live)
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -82,18 +87,18 @@ export default function Operation() {
     }, root)
     return () => ctx.revert()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lang])
+  }, [])
 
   return (
-    <section ref={root} id="operacao" className="relative h-[100svh] overflow-hidden bg-[#050505]">
+    <section ref={root} id="operacao" className="relative h-[100svh] overflow-hidden bg-black">
       {/* header */}
       <div className="op-head absolute inset-x-0 top-0 z-20 flex items-center justify-between px-6 pt-20 md:px-10">
         <p className="mono text-[11px] uppercase tracking-[0.35em] text-white">
-          {t.operation.heading} <span className="text-[#ff2e2e]">— 04</span>
+          {opHeading} <span className="text-[#ff2e2e]">— 04</span>
         </p>
         <p className="mono flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-[#6f6f6f]">
           <span className="blink inline-block h-1.5 w-1.5 rounded-full bg-[#ff2e2e]" />
-          {t.operation.live}
+          {opLive}
         </p>
       </div>
 
@@ -142,7 +147,7 @@ export default function Operation() {
                 {p.index}
               </span>
               <h3 className="mt-2 text-3xl font-bold tracking-tight text-white md:text-5xl">
-                {p.title}
+                <ScrambleText text={p.title} />
                 <span className="text-[#ff2e2e]">_</span>
               </h3>
               <p className="mt-5 max-w-md text-sm leading-relaxed text-[#8a8a8a] md:text-base">{p.desc}</p>

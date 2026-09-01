@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useT } from '../i18n/LanguageContext'
+import { useScramble } from '../components/Scramble'
 import RecTimer from '../components/RecTimer'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -9,6 +10,11 @@ gsap.registerPlugin(ScrollTrigger)
 export default function Hero({ start }: { start: boolean }) {
   const root = useRef<HTMLElement>(null)
   const { t } = useT()
+
+  const heroBadge = useScramble(t.hero.badge)
+  const heroLine1 = useScramble(t.hero.line1)
+  const heroLine2 = useScramble(t.hero.line2.replace('.', ''))
+  const heroSub = useScramble(t.hero.sub)
 
   useLayoutEffect(() => {
     if (!start) return
@@ -96,21 +102,21 @@ export default function Hero({ start }: { start: boolean }) {
       {/* title */}
       <div className="hero-title-wrap relative z-10 flex flex-1 flex-col justify-center px-6 md:px-10">
         <p className="hero-fade mono mb-6 translate-y-4 text-[11px] uppercase tracking-[0.35em] text-[#ff2e2e] opacity-0">
-          {t.hero.badge}
+          {heroBadge}
         </p>
         <h1 className="text-[clamp(3.4rem,12.5vw,11.5rem)] font-bold leading-[0.92] tracking-[-0.03em]">
           <span className="hero-line block overflow-hidden">
-            <span className="block translate-y-full">{t.hero.line1}</span>
+            <span className="block translate-y-full">{heroLine1}</span>
           </span>
           <span className="hero-line block overflow-hidden">
             <span className="text-stroke block translate-y-full">
-              {t.hero.line2.replace('.', '')}
+              {heroLine2}
               <span className="text-stroke-red">.</span>
             </span>
           </span>
         </h1>
         <p className="hero-fade mt-8 max-w-md translate-y-4 text-sm leading-relaxed text-[#8a8a8a] opacity-0 md:text-base">
-          {t.hero.sub}
+          {heroSub}
         </p>
       </div>
 
