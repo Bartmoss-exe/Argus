@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useT } from '../i18n/LanguageContext'
+import RecTimer from '../components/RecTimer'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -49,9 +50,13 @@ export default function Hero({ start }: { start: boolean }) {
         yoyo: true,
         repeat: -1,
       })
-      // Scroll parallax out
+      // Scroll parallax out (scale lives on the img so it never fights the entrance tween)
       gsap.to('.hero-globe', {
         yPercent: 18,
+        ease: 'none',
+        scrollTrigger: { trigger: root.current, start: 'top top', end: 'bottom top', scrub: true },
+      })
+      gsap.to('.hero-globe img', {
         scale: 1.08,
         ease: 'none',
         scrollTrigger: { trigger: root.current, start: 'top top', end: 'bottom top', scrub: true },
@@ -116,7 +121,7 @@ export default function Hero({ start }: { start: boolean }) {
         </div>
         <div className="hero-fade mono flex translate-y-4 items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-[#6f6f6f] opacity-0">
           <span className="blink inline-block h-1.5 w-1.5 rounded-full bg-[#ff2e2e]" />
-          REC 00:00:00
+          <RecTimer />
         </div>
         <div className="hero-fade mono translate-y-4 text-[10px] uppercase tracking-[0.3em] text-[#6f6f6f] opacity-0">
           {t.hero.scroll}

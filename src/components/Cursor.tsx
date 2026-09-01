@@ -48,7 +48,7 @@ export default function Cursor() {
         ref={ringRef}
         className="absolute -left-4 -top-4 h-8 w-8 rounded-full border border-white opacity-50 mix-blend-difference"
       />
-      <div ref={dotRef} className="absolute -left-[3px] -top-[3px] h-1.5 w-1.5 bg-[#ff2e2e]" />
+      <div ref={dotRef} className="absolute -left-1 -top-1 h-2 w-2 rounded-full bg-[#ff2e2e]" />
     </div>
   )
 }

@@ -41,7 +41,7 @@ export default function Home() {
   }, [loaded])
 
   return (
-    <div className="grain relative bg-[#050505] text-[#f4f4f4]">
+    <div className="grain relative bg-black text-[#f4f4f4]">
       <Cursor />
       {!loaded && <Loader onDone={handleDone} />}
       <LanguageProvider>
