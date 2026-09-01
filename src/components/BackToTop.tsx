@@ -10,9 +10,13 @@ interface BackToTopProps {
   lenis: Lenis | null
 }
 
+const RADIUS = 21
+const CIRCUMFERENCE = 2 * Math.PI * RADIUS
+
 export default function BackToTop({ lenis }: BackToTopProps) {
   const [visible, setVisible] = useState(false)
   const btnRef = useRef<HTMLButtonElement>(null)
+  const ringRef = useRef<SVGCircleElement>(null)
 
   useEffect(() => {
     const show = ScrollTrigger.create({
@@ -20,7 +24,13 @@ export default function BackToTop({ lenis }: BackToTopProps) {
       start: 'top -50%',
       end: 'bottom bottom',
       onUpdate: (self) => {
-        setVisible(self.scroll() > window.innerHeight * 0.5)
+        const scrollY = self.scroll()
+        setVisible(scrollY > window.innerHeight * 0.5)
+        if (ringRef.current) {
+          const max = document.documentElement.scrollHeight - window.innerHeight
+          const progress = max > 0 ? Math.min(scrollY / max, 1) : 0
+          ringRef.current.style.strokeDashoffset = String(CIRCUMFERENCE * (1 - progress))
+        }
       },
     })
     return () => show.kill()
@@ -50,10 +60,33 @@ export default function BackToTop({ lenis }: BackToTopProps) {
       ref={btnRef}
       onClick={handleClick}
       data-hover
-      className="fixed right-6 bottom-8 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-[#050505]/80 text-white opacity-0 backdrop-blur-sm transition-colors duration-300 hover:border-[#ff2e2e] hover:bg-[#ff2e2e] hover:text-black md:right-10"
+      className="group fixed bottom-8 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-[#050505]/80 text-white opacity-0 backdrop-blur-sm transition-colors duration-300 hover:border-[#ff2e2e] md:right-10"
       aria-label="Voltar ao topo"
     >
-      <ArrowUp className="h-5 w-5" />
+      {/* scroll progress ring */}
+      <svg className="absolute inset-0 h-full w-full -rotate-90" viewBox="0 0 48 48" aria-hidden>
+        <circle
+          cx="24"
+          cy="24"
+          r={RADIUS}
+          fill="none"
+          stroke="rgba(255,255,255,0.08)"
+          strokeWidth="2"
+        />
+        <circle
+          ref={ringRef}
+          cx="24"
+          cy="24"
+          r={RADIUS}
+          fill="none"
+          stroke="#ff2e2e"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeDasharray={CIRCUMFERENCE}
+          strokeDashoffset={CIRCUMFERENCE}
+        />
+      </svg>
+      <ArrowUp className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:text-[#ff2e2e]" />
     </button>
   )
 }
