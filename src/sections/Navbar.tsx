@@ -150,7 +150,7 @@ export default function Navbar({ lenis }: NavbarProps) {
 
             <a
               href="#contato"
-              className="mono hidden border border-white/40 px-4 py-2 text-[11px] uppercase tracking-[0.25em] transition-colors duration-300 hover:bg-white hover:text-black md:block"
+              className="mono border border-white/40 px-3 py-2 text-[10px] uppercase tracking-[0.25em] transition-colors duration-300 hover:bg-white hover:text-black md:px-4 md:text-[11px]"
             >
               {navCta}
             </a>

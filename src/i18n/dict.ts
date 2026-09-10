@@ -35,6 +35,19 @@ export interface Translation {
     line2suffix: string
     cta: string
     note: string
+    form: {
+      title: string
+      name: string
+      email: string
+      message: string
+      submit: string
+      hint: string
+    }
+    schedule: {
+      label: string
+      cta: string
+      note: string
+    }
     footer: string
     tagline: string
   }
@@ -114,6 +127,19 @@ export const dict: Record<Lang, Translation> = {
       line2suffix: '?',
       cta: 'Start operation',
       note: 'contato@arguspentest.com · reply within 24h',
+      form: {
+        title: './init_contact.sh',
+        name: 'name',
+        email: 'e-mail',
+        message: 'message',
+        submit: 'Transmit',
+        hint: 'opens your mail app with the message ready to send',
+      },
+      schedule: {
+        label: '// or talk to us live',
+        cta: 'Book a call',
+        note: '30 min · no strings attached',
+      },
       footer: '© 2026 ARGUS PENTEST',
       tagline: 'We strike first.',
     },
@@ -190,6 +216,19 @@ export const dict: Record<Lang, Translation> = {
       line2suffix: '?',
       cta: 'Iniciar operación',
       note: 'contato@arguspentest.com · respuesta en 24h',
+      form: {
+        title: './iniciar_contacto.sh',
+        name: 'nombre',
+        email: 'e-mail',
+        message: 'mensaje',
+        submit: 'Transmitir',
+        hint: 'abre tu cliente de correo con el mensaje listo para enviar',
+      },
+      schedule: {
+        label: '// o habla con nosotros en vivo',
+        cta: 'Agendar una llamada',
+        note: '30 min · sin compromiso',
+      },
       footer: '© 2026 ARGUS PENTEST',
       tagline: 'Atacamos primero.',
     },
@@ -266,6 +305,19 @@ export const dict: Record<Lang, Translation> = {
       line2suffix: '?',
       cta: 'Iniciar operação',
       note: 'contato@arguspentest.com · resposta em 24h',
+      form: {
+        title: './iniciar_contato.sh',
+        name: 'nome',
+        email: 'e-mail',
+        message: 'mensagem',
+        submit: 'Transmitir',
+        hint: 'abre seu cliente de e-mail com a mensagem pronta para enviar',
+      },
+      schedule: {
+        label: '// ou fale com a gente ao vivo',
+        cta: 'Agendar uma call',
+        note: '30 min · sem compromisso',
+      },
       footer: '© 2026 ARGUS PENTEST',
       tagline: 'Atacamos primeiro.',
     },
@@ -342,6 +394,19 @@ export const dict: Record<Lang, Translation> = {
       line2suffix: ' ?',
       cta: "Lancer l'opération",
       note: 'contato@arguspentest.com · réponse sous 24h',
+      form: {
+        title: './initier_contact.sh',
+        name: 'nom',
+        email: 'e-mail',
+        message: 'message',
+        submit: 'Transmettre',
+        hint: 'ouvre votre client mail avec le message prêt à envoyer',
+      },
+      schedule: {
+        label: '// ou parlez-nous en direct',
+        cta: 'Réserver un appel',
+        note: '30 min · sans engagement',
+      },
       footer: '© 2026 ARGUS PENTEST',
       tagline: "Nous frappons d'abord.",
     },

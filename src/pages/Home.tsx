@@ -23,7 +23,7 @@ export default function Home() {
   const handleDone = useCallback(() => setLoaded(true), [])
 
   useEffect(() => {
-    const lenisInstance = new Lenis({ lerp: 0.09, smoothWheel: true })
+    const lenisInstance = new Lenis({ lerp: 0.09, smoothWheel: true, anchors: true })
     setLenis(lenisInstance)
     lenisInstance.on('scroll', ScrollTrigger.update)
     const raf = (time: number) => lenisInstance.raf(time * 1000)
